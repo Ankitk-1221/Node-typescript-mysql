@@ -1,0 +1,23 @@
+st mysql = require('mysql2');
+ 
+export abstract class databaseService {
+ 
+  private static sqlConfig = {
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'fileideanews'
+  };
+ 
+  public static async getAllPosts(params: string) {
+    var connection = mysql.createConnection(this.sqlConfig);
+ 
+    connection.query('SELECT * FROM posts', (error: any, results: Post[], fields: any) => {
+      if (error)
+        logger.err(error);
+      else {
+        console.log(results);
+      }
+    });
+  }
+}
